@@ -1,0 +1,31 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "Bani",
+    "longName": "Diamond",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/diamond.png",
+                "name": "DIAMOND",
+                "targetPlatforms": [
+                    "chalk"
+                ],
+                "type": "bitmap"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "Diamond",
+    "targetPlatforms": [
+        "chalk"
+    ],
+    "uuid": "4746bcfa-998b-4def-82dc-90a2a537b85e",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": true
+    }
+}

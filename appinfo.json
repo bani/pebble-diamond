@@ -1,16 +1,72 @@
 {
     "appKeys": {},
     "capabilities": [
-        ""
+        "configurable"
     ],
     "companyName": "Bani",
-    "longName": "Diamond",
+    "longName": "DiamondTest",
     "projectType": "native",
     "resources": {
         "media": [
             {
-                "file": "images/diamond.png",
+                "file": "images/diamond-white.png",
                 "name": "DIAMOND",
+                "targetPlatforms": [
+                    "chalk"
+                ],
+                "type": "bitmap"
+            },
+            {
+                "file": "images/diamond-aqua.png",
+                "name": "DIAMONDAQUA",
+                "targetPlatforms": [
+                    "chalk"
+                ],
+                "type": "bitmap"
+            },
+            {
+                "file": "images/diamond-blue.png",
+                "name": "DIAMONDBLUE",
+                "targetPlatforms": [
+                    "chalk"
+                ],
+                "type": "bitmap"
+            },
+            {
+                "file": "images/diamond-green.png",
+                "name": "DIAMONDGREEN",
+                "targetPlatforms": [
+                    "chalk"
+                ],
+                "type": "bitmap"
+            },
+            {
+                "file": "images/diamond-pink.png",
+                "name": "DIAMONDPINK",
+                "targetPlatforms": [
+                    "chalk"
+                ],
+                "type": "bitmap"
+            },
+            {
+                "file": "images/diamond-purple.png",
+                "name": "DIAMONDPURPLE",
+                "targetPlatforms": [
+                    "chalk"
+                ],
+                "type": "bitmap"
+            },
+            {
+                "file": "images/diamond-red.png",
+                "name": "DIAMONDRED",
+                "targetPlatforms": [
+                    "chalk"
+                ],
+                "type": "bitmap"
+            },
+            {
+                "file": "images/diamond-yellow.png",
+                "name": "DIAMONDYELLOW",
                 "targetPlatforms": [
                     "chalk"
                 ],

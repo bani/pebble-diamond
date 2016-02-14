@@ -1,5 +1,7 @@
 #include <pebble.h>
 
+#define KEY_GEM_COLOR 0
+
 Window *window;
 TextLayer *s_time_layer;
 static GBitmap *s_bitmap;
@@ -42,28 +44,45 @@ static void update_time() {
 }
 
 static void main_window_unload(Window *window) {
-	text_layer_destroy(s_time_layer);
+  text_layer_destroy(s_time_layer);
   bitmap_layer_destroy(s_bitmap_layer);
   gbitmap_destroy(s_bitmap);
 }
 
+static void set_gem_color(int color) {
+  s_bitmap = gbitmap_create_with_resource(RESOURCE_ID_DIAMONDPURPLE);
+  bitmap_layer_set_bitmap(s_bitmap_layer, s_bitmap);
+}
+
+static void inbox_received_handler(DictionaryIterator *iter, void *context) {
+  Tuple *gem_color_t = dict_find(iter, KEY_GEM_COLOR);
+
+  if (gem_color_t) {
+    int gem_color = gem_color_t->value->int32;
+    persist_write_int(KEY_GEM_COLOR, gem_color);
+    set_gem_color(gem_color);
+  }
+}
+
 void handle_init(void) {
-	window = window_create();
+  window = window_create();
   window_set_window_handlers(window, (WindowHandlers) {
     .load = main_window_load,
     .unload = main_window_unload
   });
 
-	window_stack_push(window, true);
+  window_stack_push(window, true);
+  
+  app_message_register_inbox_received(inbox_received_handler);
   
   update_time();
-	
-	// App Logging!
-	APP_LOG(APP_LOG_LEVEL_DEBUG, "Just pushed a window!");
+  
+  // App Logging!
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Just pushed a window!");
 }
 
 void handle_deinit(void) {
-	window_destroy(window);
+  window_destroy(window);
 }
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
@@ -76,8 +95,8 @@ void start_clock(void) {
 }
 
 int main(void) {
-	handle_init();
+  handle_init();
   start_clock();
-	app_event_loop();
-	handle_deinit();
+  app_event_loop();
+  handle_deinit();
 }

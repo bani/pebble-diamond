@@ -1,5 +1,7 @@
 {
-    "appKeys": {},
+    "appKeys": {
+        "KEY_GEM_COLOR": 0
+    },
     "capabilities": [
         "configurable"
     ],

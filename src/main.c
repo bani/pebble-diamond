@@ -108,7 +108,7 @@ void handle_init(void) {
   update_time();
   
   // App Logging!
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "Just pushed a window!");
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Init completed");
 }
 
 void handle_deinit(void) {

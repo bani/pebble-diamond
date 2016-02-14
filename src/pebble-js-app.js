@@ -14,14 +14,18 @@ Pebble.addEventListener('webviewclosed', function(e) {
   var configData = JSON.parse(decodeURIComponent(e.response));
 
   console.log('Configuration page returned: ' + JSON.stringify(configData));
+  
+  var gemColor = configData['gem_color'];
 
-  if (configData.gemColor) {
-    Pebble.sendAppMessage({
-      backgroundColor: parseInt(configData.gemColor, 16),
-    }, function() {
-      console.log('Send successful!');
-    }, function() {
-      console.log('Send failed!');
-    });
+  var dict = {};
+  if(configData['gem_color']) {
+    dict['KEY_GEM_COLOR'] = parseInt(gemColor, 16);
   }
+
+  // Send to watchapp
+  Pebble.sendAppMessage(dict, function() {
+    console.log('Send successful: ' + JSON.stringify(dict));
+  }, function() {
+    console.log('Send failed!');
+  });
 });

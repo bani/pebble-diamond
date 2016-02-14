@@ -7,16 +7,49 @@ TextLayer *s_time_layer;
 static GBitmap *s_bitmap;
 static BitmapLayer *s_bitmap_layer;
 
+static void set_background_gem(int color) {
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Updating background gem");
+  if (s_bitmap) gbitmap_destroy(s_bitmap);
+  switch(color) {
+    case 0:
+      s_bitmap = gbitmap_create_with_resource(RESOURCE_ID_DIAMOND);
+      break;
+    case 1:
+      s_bitmap = gbitmap_create_with_resource(RESOURCE_ID_DIAMONDAQUA);
+      break;
+    case 2:
+      s_bitmap = gbitmap_create_with_resource(RESOURCE_ID_DIAMONDBLUE);
+      break;
+    case 3:
+      s_bitmap = gbitmap_create_with_resource(RESOURCE_ID_DIAMONDGREEN);
+      break;
+    case 4:
+      s_bitmap = gbitmap_create_with_resource(RESOURCE_ID_DIAMONDPINK);
+      break;
+    case 5:
+      s_bitmap = gbitmap_create_with_resource(RESOURCE_ID_DIAMONDPURPLE);
+      break;
+    case 6:
+      s_bitmap = gbitmap_create_with_resource(RESOURCE_ID_DIAMONDRED);
+      break;
+    case 7:
+      s_bitmap = gbitmap_create_with_resource(RESOURCE_ID_DIAMONDYELLOW);
+      break;
+    default:
+      s_bitmap = gbitmap_create_with_resource(RESOURCE_ID_DIAMOND);
+  }
+  bitmap_layer_set_bitmap(s_bitmap_layer, s_bitmap);
+}
+
 static void main_window_load(Window *window) {
   // Get information about the Window
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
   
   // Background Image
-  s_bitmap = gbitmap_create_with_resource(RESOURCE_ID_DIAMOND);
   s_bitmap_layer = bitmap_layer_create(bounds);
-  bitmap_layer_set_bitmap(s_bitmap_layer, s_bitmap);
   bitmap_layer_set_compositing_mode(s_bitmap_layer, GCompOpSet);
+  set_background_gem(0);
   layer_add_child(window_layer, bitmap_layer_get_layer(s_bitmap_layer));
 
   // Time Layout
@@ -49,18 +82,14 @@ static void main_window_unload(Window *window) {
   gbitmap_destroy(s_bitmap);
 }
 
-static void set_gem_color(int color) {
-  s_bitmap = gbitmap_create_with_resource(RESOURCE_ID_DIAMONDPURPLE);
-  bitmap_layer_set_bitmap(s_bitmap_layer, s_bitmap);
-}
-
 static void inbox_received_handler(DictionaryIterator *iter, void *context) {
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "New config received");
   Tuple *gem_color_t = dict_find(iter, KEY_GEM_COLOR);
 
   if (gem_color_t) {
     int gem_color = gem_color_t->value->int32;
     persist_write_int(KEY_GEM_COLOR, gem_color);
-    set_gem_color(gem_color);
+    set_background_gem(gem_color);
   }
 }
 

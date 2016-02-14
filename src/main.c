@@ -102,6 +102,7 @@ void handle_init(void) {
 
   window_stack_push(window, true);
   
+  app_message_open(64, 64);
   app_message_register_inbox_received(inbox_received_handler);
   
   update_time();

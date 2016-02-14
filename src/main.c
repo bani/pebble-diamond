@@ -49,7 +49,8 @@ static void main_window_load(Window *window) {
   // Background Image
   s_bitmap_layer = bitmap_layer_create(bounds);
   bitmap_layer_set_compositing_mode(s_bitmap_layer, GCompOpSet);
-  set_background_gem(0);
+  int color = persist_read_int(KEY_GEM_COLOR)? persist_read_int(KEY_GEM_COLOR) : 0;
+  set_background_gem(color);
   layer_add_child(window_layer, bitmap_layer_get_layer(s_bitmap_layer));
 
   // Time Layout
@@ -83,7 +84,7 @@ static void main_window_unload(Window *window) {
 }
 
 static void inbox_received_handler(DictionaryIterator *iter, void *context) {
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "New config received");
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "New gem color received");
   Tuple *gem_color_t = dict_find(iter, KEY_GEM_COLOR);
 
   if (gem_color_t) {
@@ -108,7 +109,7 @@ void handle_init(void) {
   update_time();
   
   // App Logging!
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "Init completed");
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Pebble Diamond is Running");
 }
 
 void handle_deinit(void) {

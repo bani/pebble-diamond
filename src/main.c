@@ -91,6 +91,8 @@ static void inbox_received_handler(DictionaryIterator *iter, void *context) {
     int gem_color = gem_color_t->value->int32;
     persist_write_int(KEY_GEM_COLOR, gem_color);
     set_background_gem(gem_color);
+    Layer *window_layer = window_get_root_layer(window);
+    layer_mark_dirty(window_layer);
   }
 }
 

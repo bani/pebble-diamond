@@ -1,12 +1,14 @@
 # Diamond
 
-Diamond watchface for Pebble Time Round.
+[Diamond watchface](https://apps.getpebble.com/applications/56931746a45b56940a000017) for Pebble Time Round.
+
+Necklace adapter kit availble at http://weureka.com
 
 Background image adapted from Creative Commons file at http://freedesignfile.com/135161-shiny-diamond-vector-design-01/
 
-Available at https://apps.getpebble.com/applications/56931746a45b56940a000017
+Thanks for all the help from the [Pebbledev Slack channel](http://slack.pbldev.io/).
 
-## App Description
+### App Description
 
 It's time for smart jewellery.
 
